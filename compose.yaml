@@ -1,0 +1,35 @@
+# Created by IRONKAGE (Hybrid Edition - May 2026)
+name: ironkage-sql-stand
+
+networks:
+  stand_net:
+    driver: bridge
+
+services:
+  api:
+    build: ./backend
+    container_name: rdb_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - stand_net
+
+  adminer:
+    image: adminer:5.4.2
+    container_name: rdb_adminer
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      ADMINER_DESIGN: dracula
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - stand_net

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <title>SQL IDE - GOD MODE PRO by IRONKAGE</title>
+    <!-- Сторонні бібліотеки -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- SQL Formatter (AST Parser) -->
+    <script defer src="js/libs/sql-formatter.min.js"></script>
+    <!-- CodeMirror Autocomplete -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/hint/show-hint.min.js"></script>
+    <!-- HTML to Image for ERD Export -->
+    <script defer src="js/libs/html-to-image.min.js"></script>
+    <!-- Наші стилі -->
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body class="theme-dracula flex flex-col h-screen overflow-hidden p-1 pb-2 gap-1 border-b-4 border-slate-900 transition-colors duration-300">
+    <div id="anim-overlay"></div>
+
+    <!-- 1. Workspace Header (5%) -->
+    <header id="workspace-header" class="h-[5%] min-h-[40px] glass flex items-center justify-between px-4 shrink-0 rounded"></header>
+
+    <!-- 2. Main Block (70%) -->
+    <main class="h-[70%] flex gap-1 shrink-0">
+        <section id="query-editor" class="w-[50%] glass flex flex-col rounded overflow-hidden"></section>
+        <section id="data-grid" class="w-[30%] glass flex flex-col rounded overflow-hidden"></section>
+        <section id="schema-inspector" class="w-[20%] glass flex flex-col rounded overflow-hidden"></section>
+    </main>
+
+    <!-- 3. Console Logger (15%) -->
+    <footer id="console-logger" class="h-[15%] flex gap-1 shrink-0"></footer>
+
+    <!-- 4. Snippet Engine (10%) -->
+    <section id="snippet-engine" class="h-[10%] flex gap-1 shrink-0"></section>
+
+    <!-- ERD Modal -->
+    <div id="erd-modal" class="fixed inset-0 bg-black/95 hidden z-[100] flex items-center justify-center p-10 backdrop-blur-sm"></div>
+
+    <!-- Підключення логіки як ES Module -->
+    <script type="module" src="js/core.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+/* Темна тема (Dracula - Default) */
+:root {
+    --bg: #282a36; --panel: #1e1f29; --accent: #10b981; --text: #f8f8f2; --border: #44475a; --null: #6272a4;
+    --code-bg: rgba(0, 0, 0, 0.3);
+    --log-text: #94a3b8; /* slate-400 */
+    --snip-text: var(--accent);
+}
+
+/* Світла тема (Alucard) */
+.theme-alucard {
+    --bg: #f4f4f5; --panel: #ffffff; --accent: #dc2626; --text: #18181b; --border: #e4e4e7; --null: #a1a1aa;
+    --code-bg: #f1f5f9;
+    --log-text: #334155;
+    --snip-text: #991b1b;
+}
+
+body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; }
+
+.glass { background: var(--panel); border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.15); }
+.panel-header { background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: bold; text-transform: uppercase; color: var(--accent); padding: 4px 8px; }
+.theme-alucard .panel-header { background: rgba(0,0,0,0.03); }
+
+/* CodeMirror */
+.CodeMirror { height: 100% !important; background: transparent !important; color: var(--text) !important; font-size: 13px; font-family: inherit; }
+.CodeMirror-gutters { background: transparent !important; border-right: 1px solid var(--border) !important; }
+.CodeMirror-linenumber { color: #6272a4 !important; }
+.theme-alucard .CodeMirror-linenumber { color: #a1a1aa !important; }
+
+/* =======================================================
+   ЕТАЛОН: КНОПКИ ТА ІНТЕРАКТИВНІ ЕЛЕМЕНТИ
+   ======================================================= */
+.btn-base {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    min-width: max-content;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+}
+.theme-alucard .btn-base {
+    background: #e4e4e7;
+    color: #18181b;
+    font-weight: 600;
+}
+.btn-base:hover { background: var(--border); }
+.theme-alucard .btn-base:hover { background: #d4d4d8; }
+
+.btn-primary { background: var(--accent); color: #fff; font-weight: bold; border: none; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+.btn-primary:hover { filter: brightness(1.2); }
+
+/* Інпути та Селекти (успадковують еталон кнопок) */
+.input-style {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--text);
+    cursor: pointer;
+}
+.theme-alucard .input-style {
+    background: #e4e4e7; /* Такий самий фон, як у кнопок */
+    color: #18181b;
+    font-weight: 600;
+}
+.input-style:hover { border-color: var(--accent); }
+
+/* Стилізація самих опцій всередині <select> */
+select.input-style option { background: var(--panel); color: var(--text); font-weight: bold; }
+.theme-alucard select.input-style option { background: #ffffff; color: #18181b; }
+
+/* =======================================================
+   СПЛИВАЮЧІ ВІКНА ТА ТУЛТИПИ (Адаптивні)
+   ======================================================= */
+.group:hover .tooltip { opacity: 1; visibility: visible; }
+.tooltip {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Використовуємо адаптивні кольори замість жорсткого #000 */
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--accent);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    width: 200px;
+    text-align: center;
+    z-index: 100;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+}
+.theme-alucard .tooltip {
+    background: #e4e4e7; /* Світлий фон у стилі еталонної кнопки */
+    color: #18181b;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* М'якша тінь для світлої теми */
+}
+
+/* --- ЧИТАБЕЛЬНІСТЬ ЛОГІВ --- */
+.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    line-height: 1.6;
+}
+.log-default { color: var(--log-text); }
+.snippet-text { color: var(--snip-text); font-weight: 600; }
+
+#anim-overlay { position: fixed; inset: 0; background: var(--accent); opacity: 0; pointer-events: none; z-index: 50; mix-blend-mode: overlay; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ==========================================
+   КІБЕР-КУРСОР ДЛЯ CODEMIRROR
+========================================== */
+
+/* 1. Ховаємо стандартну тонку лінію курсора */
+.CodeMirror-cursor {
+    border-left: none !important;
+    width: 0 !important;
+}
+
+/* 2. Додаємо свій символ (силует) */
+.CodeMirror-cursor::after {
+    content: '🁢'; /* Можеш змінити на '⍅', якщо він більше подобається */
+    color: var(--accent); /* Автоматично червоний або зелений залежно від теми */
+    position: absolute;
+    left: -5px; /* Центруємо відносно літери */
+    top: -2px;  /* Коригуємо по висоті */
+    font-size: 1.1em;
+    font-weight: 900;
+    pointer-events: none;
+
+    /* Додаємо неонове світіння, як у кнопок */
+    text-shadow: 0 0 8px var(--accent);
+}
+
+/* ==========================================
+   АВТОЗАПОВНЕННЯ (AUTOCOMPLETE DROPDOWN)
+========================================== */
+.CodeMirror-hints {
+    background-color: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 4px 0;
+    z-index: 9999;
+    font-family: inherit;
+}
+.CodeMirror-hint {
+    color: var(--text);
+    padding: 4px 10px;
+    font-size: 11px;
+    transition: background 0.1s;
+}
+/* Активний елемент списку підсвічується кольором теми */
+.CodeMirror-hint-active {
+    background-color: var(--accent) !important;
+    color: var(--panel) !important;
+    font-weight: 900;
+}
